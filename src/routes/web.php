@@ -1,7 +1,7 @@
 <?php
-
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\DashboardController;   
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,13 +13,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-//auth route for both 
-Route::group(['middleware' => ['auth']], function() { 
-    Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/book', [BookController::class, 'index'])->name('book.index');
+    Route::get('/book/create', [BookController::class, 'create'])->name('book.create');
+    Route::post('/book', [BookController::class, 'store'])->name('book.store');
+    Route::get('/book/{book}/edit', [BookController::class, 'edit'])->name('book.edit');
+    Route::put('/book/{book}/update', [BookController::class, 'update'])->name('book.update');
+    Route::delete('/book/{id}', [BookController::class, 'delete'])->name('book.delete');
 });
+
+
+
+
 
 require __DIR__.'/auth.php';

@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Dashboard for admin') }}
+        </h2>
+    </x-slot>
+
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -59,3 +66,4 @@
     </div>
 </body>
 </html>
+</x-app-layout>
